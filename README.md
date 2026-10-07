@@ -7,6 +7,8 @@ Bản dựng lại web app trong video tham chiếu (`docs/ref/reference_video.m
 
 Toàn bộ dữ liệu là dữ liệu giả lập.
 
+**Demo trực tuyến:** https://nguyenthong251.github.io/waretrack-3d/ — mỗi lần push lên `main`, GitHub Actions tự build và deploy lại (`.github/workflows/deploy.yml`).
+
 ## Chạy
 
 ```bash
