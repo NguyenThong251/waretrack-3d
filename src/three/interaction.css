@@ -1,0 +1,88 @@
+/* 3D-anchored label pills on the CSS2D layer (interaction.js).
+   refs: docs/ref/ui/label_forklift.png, pallet_hover.png, dock_hover.png (selected → blue),
+         docs/ref/19_wh03_bay_hover.jpg, 21_wh04_overview.jpg (plain hover → light). */
+
+.wt-label-layer {
+  z-index: 1;
+}
+
+/* positioned by CSS2DRenderer (it owns `transform`); the pill inside animates freely */
+.wt-tag-anchor {
+  pointer-events: none;
+  padding-bottom: 5px; /* room for the pointer tip below the pill */
+}
+
+/* sizes at the 1440 design scale: "FL-01  Loading truck" ≈ 104 × 17 px (video: 90 × 15 at 1248) */
+.wt-tag {
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  padding: 2px 6px 2px 6px;
+  border-radius: 7px;
+  background: #2b49cc; /* the video's pill is a shade deeper than --blue */
+  color: rgba(255, 255, 255, 0.78);
+  font-family: var(--font, Inter, system-ui, sans-serif);
+  font-size: 9px;
+  font-weight: 500;
+  line-height: 1.35;
+  white-space: nowrap;
+  box-shadow: 0 3px 10px rgba(32, 58, 170, 0.28), inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+  user-select: none;
+  transform-origin: 50% 100%;
+  animation: wt-tag-in 0.16s ease-out both;
+}
+
+.wt-tag b {
+  color: #fff;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.wt-tag span:empty {
+  display: none;
+}
+
+/* small down-pointer */
+.wt-tag::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -3px;
+  width: 6px;
+  height: 6px;
+  margin-left: -3px;
+  background: inherit;
+  border-radius: 0 0 2px 0;
+  transform: rotate(45deg);
+  z-index: -1;
+}
+
+/* plain hover: light glass pill */
+.wt-tag--light {
+  background: rgba(255, 255, 255, 0.96);
+  color: var(--text-2, #5d6579);
+  box-shadow: 0 3px 10px rgba(36, 56, 120, 0.14), inset 0 0 0 1px rgba(222, 228, 242, 0.95);
+}
+
+.wt-tag--light b {
+  color: var(--text, #151a2d);
+}
+
+@keyframes wt-tag-in {
+  from {
+    opacity: 0;
+    transform: translateY(3px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wt-tag {
+    animation: none;
+  }
+}

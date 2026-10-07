@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WareTrack dev — buildings</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+      html, body { margin: 0; height: 100%; overflow: hidden; background: #eef1fa; font: 13px/1.35 Inter, system-ui, sans-serif; color: #151a2d; }
+      #view { position: fixed; inset: 0; }
+      #hud { position: fixed; top: 12px; left: 12px; background: rgba(255,255,255,.92); border: 1px solid #dee4f2; border-radius: 12px; padding: 10px 12px; box-shadow: 0 10px 30px rgba(36,56,120,.10); max-width: 420px; }
+      #hud nav { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 6px; }
+      #hud a { padding: 3px 8px; border-radius: 7px; background: #f1f3f7; color: #2f5bea; text-decoration: none; font-weight: 600; }
+      #hud a.on { background: #2f5bea; color: #fff; }
+      #hud pre { margin: 0; font: 11.5px/1.4 ui-monospace, Consolas, monospace; color: #5d6579; white-space: pre-wrap; }
+      body.clean #hud { display: none; }
+      /* HMR errors from other in-progress modules would cover the canvas; check the console instead */
+      vite-error-overlay { display: none !important; }
+    </style>
+  </head>
+  <body>
+    <div id="view"></div>
+    <div id="hud"><nav id="nav"></nav><pre id="info"></pre></div>
+    <script type="module" src="./buildings.js"></script>
+  </body>
+</html>

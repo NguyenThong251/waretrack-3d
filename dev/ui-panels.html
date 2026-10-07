@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WareTrack · ui-panels dev</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+      /* stage = the app viewport; in crop mode it is a fixed 1440×830 design canvas shifted so a
+         region can be inspected at 1:1 in a small browser pane */
+      #stage { position: fixed; left: 0; top: 0; width: 100vw; height: 100vh; overflow: hidden; }
+      body.crop #stage { width: 1440px; height: 830px; }
+      #stage #ui { position: absolute; }
+      /* reference frame behind the overlay, scaled like the app canvas would be */
+      #ref {
+        position: absolute;
+        inset: 0;
+        background: #eef1fa url('/docs/ref/01_wh01_overview.jpg') center / cover no-repeat;
+      }
+      body.ref-off #ref { background-image: none !important; }
+      body.ui-half #ui { opacity: .55; }
+      body.ui-diff #ui { mix-blend-mode: difference; }
+      body.ui-hidden #ui { visibility: hidden; }
+
+      #devbar {
+        position: fixed;
+        left: 50%;
+        bottom: 6px;
+        z-index: 100;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 4px;
+        max-width: 760px;
+        padding: 5px 6px;
+        transform: translateX(-50%);
+        border-radius: 10px;
+        background: rgba(21, 26, 45, .82);
+        font: 500 10.5px/1 Inter, system-ui, sans-serif;
+      }
+      #devbar:not(:hover) { opacity: .55; }
+      body.bar-off #devbar { display: none; }
+      #devbar button {
+        height: 21px;
+        padding: 0 7px;
+        border: 0;
+        border-radius: 6px;
+        background: rgba(255, 255, 255, .12);
+        color: #fff;
+        font: inherit;
+        cursor: pointer;
+      }
+      #devbar button:hover { background: rgba(255, 255, 255, .24); }
+      #devbar button.on { background: #2f5bea; }
+      #devbar .sep { width: 1px; margin: 2px 2px; background: rgba(255, 255, 255, .2); }
+
+      #gallery {
+        position: fixed;
+        inset: 80px 380px 180px 40px;
+        z-index: 90;
+        display: none;
+        flex-wrap: wrap;
+        align-content: flex-start;
+        gap: 14px;
+        padding: 18px;
+        overflow: auto;
+        border-radius: 14px;
+        background: #fff;
+        box-shadow: 0 10px 30px rgba(36, 56, 120, .2);
+        font: 500 11px/1.2 Inter, system-ui, sans-serif;
+        color: #5d6579;
+      }
+      body.show-gallery #gallery { display: flex; }
+      body.gallery-full #gallery { inset: 0; gap: 6px; padding: 8px; border-radius: 0; }
+      body.gallery-full #gallery .tile { width: 84px; height: 84px; }
+      body.gallery-full #gallery .tile svg { width: 76px; height: 76px; }
+      body.gallery-full #gallery .tile.small { display: none; }
+      #gallery figure { margin: 0; text-align: center; }
+      #gallery .tile { display: grid; place-items: center; width: 104px; height: 104px; border-radius: 16px; background: linear-gradient(155deg, #f3f6fc, #e6ebf7); }
+      #gallery .tile.small { width: 52px; height: 52px; border-radius: 10px; }
+    </style>
+  </head>
+  <body>
+    <div id="stage">
+      <div id="ref"></div>
+      <div id="ui"></div>
+    </div>
+    <div id="gallery"></div>
+    <div id="devbar"></div>
+    <script type="module" src="./ui-panels.js"></script>
+  </body>
+</html>

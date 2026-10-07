@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WareTrack · ui-shell dev</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+      /* reference frame behind the overlay, scaled like the app canvas would be */
+      #ref {
+        position: fixed;
+        inset: 0;
+        background: #eef1fa url('/docs/ref/01_wh01_overview.jpg') center / cover no-repeat;
+      }
+      body.ref-off #ref { background-image: none; }
+      body.ui-half #ui { opacity: .5; }
+      body.ui-diff #ui { mix-blend-mode: difference; }
+      body.ui-hidden #ui { visibility: hidden; }
+      #devhint {
+        position: fixed;
+        left: 50%;
+        bottom: 8px;
+        z-index: 100;
+        transform: translateX(-50%);
+        padding: 5px 10px;
+        border-radius: 8px;
+        background: rgba(21, 26, 45, .78);
+        color: #fff;
+        font: 500 11px/1.3 Inter, system-ui, sans-serif;
+        white-space: nowrap;
+        pointer-events: none;
+      }
+      body.hint-off #devhint { display: none; }
+      /* other agents' modules may be mid-edit; Vite broadcasts their errors to every page */
+      vite-error-overlay { display: none !important; }
+    </style>
+  </head>
+  <body>
+    <div id="ref"></div>
+    <div id="ui"></div>
+    <div id="devhint">o overlay mode · h hide UI · b frame on/off · 1–4 frame/site · t tick clock · ? hint</div>
+    <script type="module" src="./ui-shell.js"></script>
+  </body>
+</html>

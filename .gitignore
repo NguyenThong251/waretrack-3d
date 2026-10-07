@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.vite/
+
+# local tooling state
+.omc/
+.claude/settings.local.json
+
+# third-party reference video (kept locally only; frames in docs/ref are enough for development)
+docs/ref/*.mp4
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log

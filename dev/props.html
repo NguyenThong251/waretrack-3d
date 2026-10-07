@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WareTrack · props gallery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+      html, body { margin: 0; height: 100%; overflow: hidden; background: #eef1fa; font: 13px Inter, system-ui, sans-serif; color: #151a2d; }
+      #view { position: fixed; inset: 0; }
+      #hud { position: fixed; top: 12px; left: 12px; padding: 10px 12px; background: rgba(255,255,255,.92);
+        border: 1px solid rgba(222,228,242,.95); border-radius: 10px; box-shadow: 0 10px 30px rgba(36,56,120,.10); }
+      #hud b { font-weight: 800; }
+      #hud a { color: #2f5bea; text-decoration: none; margin-right: 8px; font-weight: 600; }
+      #hud a.on { text-decoration: underline; }
+      #stats { color: #8a92a6; font-size: 11.5px; margin-top: 4px; }
+      /* other modules are built concurrently; their HMR errors are irrelevant here */
+      vite-error-overlay { display: none; }
+    </style>
+  </head>
+  <body>
+    <div id="view"></div>
+    <div id="hud">
+      <b>Props gallery</b> &nbsp;
+      <span id="views"></span>
+      <div id="stats"></div>
+    </div>
+    <script type="module" src="./props.js"></script>
+  </body>
+</html>

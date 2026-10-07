@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dev · Scene, camera & interaction</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --font: Inter, system-ui, sans-serif;
+        --text: #151a2d;
+        --text-2: #5d6579;
+        --blue: #2f5bea;
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; height: 100%; overflow: hidden; font-family: var(--font); background: #eef1fa; }
+      /* other modules are being written concurrently: keep Vite's error overlay (for files this page
+         does not load) from covering the view — check the console instead */
+      vite-error-overlay { display: none !important; }
+      #viewport { position: fixed; inset: 0; }
+      #ui { position: fixed; inset: 0; pointer-events: none; }
+      .ph {
+        position: absolute; pointer-events: auto;
+        background: rgba(255, 255, 255, 0.55); border: 1px dashed rgba(47, 91, 234, 0.35); border-radius: 14px;
+        color: #8a92a6; font-size: 11px; padding: 8px 10px;
+      }
+      #tools {
+        position: absolute; top: 12px; left: 14px; right: 380px; pointer-events: auto;
+        display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
+        background: rgba(255, 255, 255, 0.92); border: 1px solid #dee4f2; border-radius: 12px; padding: 8px 10px;
+        box-shadow: 0 10px 30px rgba(36, 56, 120, 0.1);
+      }
+      #tools b { font-size: 11px; color: var(--text-2); margin: 0 2px 0 8px; }
+      #tools button {
+        font: 600 11.5px var(--font); color: var(--text); background: #f1f3f7; border: 1px solid #e3e7f1;
+        border-radius: 7px; padding: 4px 8px; cursor: pointer;
+      }
+      #tools button:hover { background: #eaf0ff; color: var(--blue); }
+      #status { position: absolute; left: 30px; bottom: 154px; font: 500 11px/1.4 ui-monospace, monospace; color: #5d6579;
+        background: rgba(255,255,255,.85); padding: 6px 8px; border-radius: 8px; pointer-events: none; white-space: pre; }
+    </style>
+  </head>
+  <body>
+    <div id="viewport"></div>
+    <div id="ui">
+      <div id="tools"></div>
+      <!-- placeholders where the real UI cards sit (SPEC §2) — events over them must not reach the 3D view -->
+      <div class="ph" style="top: 78px; right: 30px; width: 336px; height: 300px">detail panel</div>
+      <div class="ph" style="bottom: 22px; left: 30px; width: 760px; height: 122px">shipment tracking</div>
+      <div class="ph" style="bottom: 22px; right: 30px; width: 430px; height: 150px">fleet panel</div>
+      <div id="status"></div>
+    </div>
+    <script type="module" src="./scene.js"></script>
+  </body>
+</html>

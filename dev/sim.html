@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WareTrack · simulation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <script>
+      // Other agents edit modules constantly; every change would make Vite reload this page and
+      // restart the simulation. Keep the HMR socket silent unless ?live=1 (reload by hand instead).
+      if (!new URLSearchParams(location.search).has('live')) {
+        const NativeSocket = window.WebSocket
+        window.WebSocket = function (url, protocols) {
+          if (String(protocols).startsWith('vite-')) return { readyState: 0, addEventListener() {}, removeEventListener() {}, send() {}, close() {} }
+          return new NativeSocket(url, protocols)
+        }
+        Object.assign(window.WebSocket, { CONNECTING: 0, OPEN: 1, CLOSING: 2, CLOSED: 3, prototype: NativeSocket.prototype })
+      }
+    </script>
+    <style>
+      html, body { margin: 0; height: 100%; overflow: hidden; background: #eef1fa; font: 12px Inter, system-ui, sans-serif; color: #151a2d; }
+      #view { position: fixed; left: 0; top: 0; width: 100vw; height: calc(100vw * 830 / 1440); max-height: 100vh; }
+      #hud { position: fixed; top: 8px; left: 8px; padding: 6px 8px; background: rgba(255,255,255,.92);
+        border: 1px solid rgba(222,228,242,.95); border-radius: 10px; box-shadow: 0 10px 30px rgba(36,56,120,.10); z-index: 3; }
+      #hud b { font-weight: 800; }
+      #hud button { font: 600 11px Inter, system-ui, sans-serif; color: #2f5bea; background: #eaf0ff; border: 0;
+        border-radius: 6px; padding: 3px 7px; margin: 1px; cursor: pointer; }
+      #hud button.on { background: #2f5bea; color: #fff; }
+      #clock { font-weight: 800; margin-left: 6px; }
+      #table { position: fixed; left: 0; right: 0; bottom: 0; top: calc(min(100vh, 100vw * 830 / 1440)); overflow: auto;
+        background: #fff; border-top: 1px solid #e3e8f2; font: 11px/1.35 ui-monospace, Consolas, monospace; padding: 4px 8px; white-space: pre; z-index: 2; }
+      #table .row { cursor: pointer; }
+      #table .row:hover { background: #eef3ff; }
+      #table .sel { background: #dbe4ff; }
+      #table h4 { margin: 4px 0 2px; font: 700 11px Inter, system-ui, sans-serif; color: #2f5bea; }
+      body.clean #hud, body.clean #table { display: none; }
+      body.clean #view { height: 100vh; }
+      vite-error-overlay { display: none; }
+    </style>
+  </head>
+  <body>
+    <div id="view"></div>
+    <div id="hud">
+      <b>Sim</b><span id="clock"></span>
+      <div id="sites"></div>
+      <div id="speeds"></div>
+      <div><button id="grid">grid</button><button id="follow">follow sel</button></div>
+    </div>
+    <div id="table"></div>
+    <script type="module" src="./sim.js"></script>
+  </body>
+</html>
